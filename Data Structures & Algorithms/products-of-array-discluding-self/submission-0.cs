@@ -1,23 +1,18 @@
 public class Solution {
     public int[] ProductExceptSelf(int[] nums) {
-        List<int> res = new List<int>();
-        int product = 1;
-
-
-        for(int i = 0; i < nums.Length; i++)
-        {
-            for (int j = 0; j < nums.Length; j++)
-            {
-                if(i != j)
-                {
-                    product *= nums[j];
-                }
-            }
-            res.Add(product);
-            product = 1;
+        // Ans[i] = product of everything left of its el * product of everything right of its el
+        int[] result = new int[nums.Length];
+        int prefix = 1;
+        
+        for(int i=0; i< nums.Length;i++){
+            result[i] = prefix;
+            prefix *= nums[i];
         }
-
-
-        return res.ToArray();
+        int suffix=1;
+        for(int i=nums.Length-1;i>=0; i--){
+            result[i] *= suffix;
+            suffix *= nums[i];
+        }
+        return result;
     }
 }
