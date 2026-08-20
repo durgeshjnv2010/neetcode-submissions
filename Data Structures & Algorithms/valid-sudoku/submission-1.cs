@@ -1,46 +1,40 @@
 public class Solution {
     public bool IsValidSudoku(char[][] board) {
-        
-        // Check all rows for 1 to 9
-        for(int row =0; row< 9; row++){
-            HashSet<char> map = new();
-            for(int col=0; col<9;col++){
-                char value = board[row][col];
-                if(value == '.'){
+        // Check each rows for 1 to 9 elements
+        for(int row=0;row<9; row++){
+            HashSet<char> set = new();
+            for(int col =0; col < 9; col++){
+                if(board[row][col]=='.'){
                     continue;
                 }
-                if(!map.Add(value)){
+                if(!set.Add(board[row][col])){
                     return false;
                 }
             }
         }
-
-        // Check all columns
-        for(int col =0; col<9;col++){
-            HashSet<char> map = new();
+        // Check each column for 1 to 9 elements
+        for(int col=0;col<9;col++){
+            HashSet<char> set = new();
             for(int row=0;row<9;row++){
-                char value = board[row][col];
-                if(value == '.'){
+                
+                if(board[row][col] == '.'){
                     continue;
                 }
-                if(!map.Add(value)){
+                if(!set.Add(board[row][col])){
                     return false;
                 }
             }
         }
-
-        // Check all 3X3 boxes for 1 to 9
-        for(int boxrow =0; boxrow<9;boxrow +=3){
-            for(int boxcol=0;boxcol<9;boxcol +=3){
-                HashSet<char> set = new();
-                // Check all elements for 1 to 9
-                for(int row =boxrow; row< boxrow+3; row++){
-                    for(int col=boxcol; col< boxcol+3;col++){
-                        char value = board[row][col];
-                        if(value == '.'){
+        // Check each box for 1 to 9 elements
+        for(int boxrow = 0; boxrow< 9; boxrow +=3){
+            for(int boxcol =0;boxcol<9; boxcol +=3){
+                HashSet<int> set = new();
+                for(int row = boxrow; row<boxrow+3; row++){
+                    for(int col = boxcol; col< boxcol+3; col++){
+                        if(board[row][col] == '.'){
                             continue;
                         }
-                        if(!set.Add(value)){
+                        if(!set.Add(board[row][col])){
                             return false;
                         }
                     }
@@ -49,4 +43,5 @@ public class Solution {
         }
         return true;
     }
+    
 }
