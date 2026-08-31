@@ -14,23 +14,31 @@
 
 public class Solution {
     public bool IsBalanced(TreeNode root) {
-        return Balanced(root) != -1;
+        // at each node  height of ltree and righttree differ by max 1
+        // every subtree should be balanced as well
+        return Height(root) != -1;
+
     }
-    public int Balanced(TreeNode root){
-        if(root == null){
+    private int Height(TreeNode t){
+        if( t == null){
             return 0;
         }
-        int hl = Balanced(root.left);
-        if(hl == -1){
+
+        int lh = Height(t.left);
+        if(lh == -1){
             return -1;
         }
-        int hr = Balanced(root.right);
-        if(hr == -1){
+
+        int rh = Height(t.right);
+        if(rh == -1){
             return -1;
         }
-        if(Math.Abs(hl-hr) > 1){
+
+        // if current node is unbalanced
+        if(Math.Abs(lh-rh) > 1){
             return -1;
         }
-        return Math.Max(hl,hr) +1;
+
+        return 1 + Math.Max(lh, rh);
     }
 }
