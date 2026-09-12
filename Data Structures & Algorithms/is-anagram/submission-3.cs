@@ -7,39 +7,30 @@ public class Solution {
         }
         else
         {
-            Dictionary<char, int> map1 = [];
-            Dictionary<char, int> map2 = [];
-
-            char[] sChars = s.ToCharArray();
-            char[] tChars = t.ToCharArray();
-
-
-            foreach(char c in sChars)
+            Dictionary<char, int> map = [];
+            for (int i=0;i < s.Length; i++)
             {
-                if (map1.ContainsKey(c))
+                if (map.ContainsKey(s[i]))
                 {
-                    map1[c] = map1[c] + 1;
+                    map[s[i]] = map[s[i]] + 1;
                 }
                 else
                 {
-                    map1.Add(c, 1);
+                    map.Add(s[i], 1);
                 }
-            }
-            foreach(char c in tChars)
-            {
-                if (map2.ContainsKey(c))
+                if (map.ContainsKey(t[i]))
                 {
-                    map2[c] = map2[c] + 1;
+                    map[t[i]]--;
                 }
                 else
                 {
-                    map2.Add(c,1);
+                    map[t[i]] = -1;
                 }
             }
-            foreach(var keyvalue in map1)
+            foreach(var keyvalue in map)
             {
-                map2.TryGetValue(keyvalue.Key, out int value);
-                if(value != keyvalue.Value)
+                map.TryGetValue(keyvalue.Key, out int value);
+                if(value != 0)
                 {
                     return false;
                 }
@@ -49,3 +40,4 @@ public class Solution {
         return true;
     }
 }
+
