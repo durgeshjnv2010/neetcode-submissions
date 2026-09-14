@@ -8,10 +8,6 @@ public class Solution {
         else
         {
             Dictionary<char, int> map = [];
-
-            char[] sChars = s.ToCharArray();
-
-
             for (int i=0;i < s.Length; i++)
             {
                 if (map.ContainsKey(s[i]))
@@ -22,7 +18,6 @@ public class Solution {
                 {
                     map.Add(s[i], 1);
                 }
-
                 if (map.ContainsKey(t[i]))
                 {
                     map[t[i]]--;
@@ -45,3 +40,4 @@ public class Solution {
         return true;
     }
 }
+
